@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform, type MotionValue } from "motion/r
 import { useRef, type ReactNode } from "react";
 import { MeshCanvas } from "@/components/art/mesh-canvas";
 import { DunesWallpaper, DuoWallpaper, OrbitWallpaper } from "@/components/art/wallpapers";
-import { usePreviewProgress } from "@/components/chapters/chapter-frame";
+import { usePreviewProgress, useUserDriven } from "@/components/chapters/chapter-frame";
 import type { Project } from "@/content/schema";
 import { useMotionOn } from "@/lib/preferences";
 
@@ -18,7 +18,8 @@ export function BackdropPreview({ project }: { project: Project }) {
   const scroll = usePreviewProgress(ref);
   const motionOn = useMotionOn();
   const still = useMotionValue(0.5);
-  const progress = motionOn ? scroll : still;
+  const userDriven = useUserDriven();
+  const progress = motionOn || userDriven ? scroll : still;
   const colors = project.palette.colors;
 
   // Wallpaper cross-fades are opacity only, so they stay on with reduced motion.

@@ -3,7 +3,7 @@
 import { LayoutGroup, motion, useMotionValueEvent, useTransform, type MotionValue } from "motion/react";
 import { useRef, useState, type ReactNode } from "react";
 import { IconTile, ORCHARD_TONES, type GlyphName } from "@/components/art/icon-tile";
-import { usePreviewProgress } from "@/components/chapters/chapter-frame";
+import { usePreviewProgress, useUserDriven } from "@/components/chapters/chapter-frame";
 import type { Project } from "@/content/schema";
 import { useMotionOn } from "@/lib/preferences";
 
@@ -55,7 +55,9 @@ const RELEASES: Release[] = [
 export function OrchardPreview({ project }: { project: Project }) {
   const ref = useRef<HTMLDivElement>(null);
   const progress = usePreviewProgress(ref);
-  const motionOn = useMotionOn();
+  const systemMotion = useMotionOn();
+  const userDriven = useUserDriven();
+  const motionOn = systemMotion || userDriven;
   const [sortedByScroll, setSorted] = useState(false);
   const sorted = !motionOn || sortedByScroll;
 

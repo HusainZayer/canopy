@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { ExternalIcon } from "@/components/icons";
 import { ProjectPreview } from "@/components/previews/registry";
 import { StatusBadge } from "@/components/status-badge";
@@ -14,7 +15,13 @@ export function Chapters() {
         Projects
       </h2>
       {chapterProjects.map((p) => (
-        <ChapterFrame key={p.slug} slug={p.slug} labelledBy={`${p.slug}-title`} text={<ChapterText project={p} />} preview={<ProjectPreview project={p} />} />
+        <ChapterFrame key={p.slug} slug={p.slug} labelledBy={`${p.slug}-title`} text={<ChapterText project={p} />} preview={
+            <ViewTransition name={`preview-${p.slug}`} share="morph" default="none">
+              <div>
+                <ProjectPreview project={p} />
+              </div>
+            </ViewTransition>
+          } />
       ))}
       <WorldObserver />
     </section>
@@ -44,7 +51,7 @@ function ChapterText({ project: p }: { project: Project }) {
             <ExternalIcon className="size-4" />
           </a>
         )}
-        <Link href={`/projects/${p.slug}`} className="text-link min-h-11 py-2 font-semibold">
+        <Link href={`/projects/${p.slug}`} transitionTypes={["nav-forward"]} className="text-link min-h-11 py-2 font-semibold">
           More about {p.name}
         </Link>
       </div>

@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useTransform } from "motion/react";
 import { useRef } from "react";
-import { usePreviewProgress } from "@/components/chapters/chapter-frame";
+import { usePreviewProgress, useUserDriven } from "@/components/chapters/chapter-frame";
 import type { Project } from "@/content/schema";
 import { useMotionOn } from "@/lib/preferences";
 
@@ -15,7 +15,8 @@ export function GenericPreview({ project, compact = false }: { project: Project;
   const scroll = usePreviewProgress(ref);
   const motionOn = useMotionOn();
   const still = useMotionValue(0.5);
-  const progress = motionOn ? scroll : still;
+  const userDriven = useUserDriven();
+  const progress = motionOn || userDriven ? scroll : still;
   const rotate = useTransform(progress, [0, 1], [-8, 6]);
   const rotateY = useTransform(progress, [0, 1], [18, -18]);
   const sheen = useTransform(progress, [0, 1], ["-40%", "140%"]);

@@ -3,7 +3,14 @@
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { createContext, useContext, useRef, type ReactNode, type RefObject } from "react";
 
-const ProgressContext = createContext<MotionValue<number> | null>(null);
+export const ProgressContext = createContext<MotionValue<number> | null>(null);
+
+/** True when the visitor drives the preview directly (a slider), so it may move even with motion off. */
+export const UserDrivenContext = createContext(false);
+
+export function useUserDriven() {
+  return useContext(UserDrivenContext);
+}
 
 /** Scroll progress through the current chapter, 0 as it enters to 1 as it leaves. */
 export function useChapterProgress(): MotionValue<number> | null {

@@ -309,3 +309,23 @@
     animation: none;
   }
 }
+
+/* ---------- 404 ---------- */
+.lost-tile {
+  rotate: 14deg;
+  animation: lost-wander 7s ease-in-out infinite;
+}
+@keyframes lost-wander {
+  50% {
+    translate: -14px 10px;
+    rotate: 4deg;
+  }
+}
+:root[data-motion="off"] .lost-tile {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) .lost-tile {
+    animation: none;
+  }
+}

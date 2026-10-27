@@ -10,7 +10,7 @@ export function Hero() {
 
   return (
     <section aria-labelledby="hero-title" className="relative overflow-x-clip pt-24 pb-16 sm:pt-28 lg:pb-10">
-      <div className="wrap grid min-h-[calc(100svh-7rem)] content-center gap-x-8 lg:grid-cols-12 lg:grid-rows-[auto_auto]">
+      <div className="wrap grid min-h-[calc(100svh-7rem)] grid-cols-[minmax(0,1fr)] content-center gap-x-8 lg:grid-cols-12 lg:grid-rows-[auto_auto]">
         <div className="relative z-10 lg:col-span-7 lg:self-end">
           <HeroTitle>{site.name}</HeroTitle>
           <p className="font-display mt-4 max-w-[16ch] text-step-4 leading-[1.02] font-semibold tracking-[-0.03em] sm:mt-7">

@@ -39,7 +39,7 @@
 @layer base {
   :root {
     --gutter: clamp(1.25rem, 4vw, 3.5rem);
-    --section: clamp(6rem, 14vh, 11rem);
+    --section: clamp(4.5rem, 11vh, 10rem);
     --wash-duration: 900ms;
     scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) transparent;
   }

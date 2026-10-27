@@ -1,10 +1,12 @@
+import { Chapters } from "@/components/chapters/chapters";
 import { Hero } from "@/components/hero/hero";
 
 export default function Home() {
   return (
     <main id="main">
       <Hero />
-      <div id="work" className="h-[150vh]" />
+      <Chapters />
+      <div id="workshop" className="h-[80vh]" />
     </main>
   );
 }

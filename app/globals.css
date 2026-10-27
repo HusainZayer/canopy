@@ -291,3 +291,21 @@
     animation: none;
   }
 }
+
+/* ---------- Workshop ---------- */
+.workshop-drift {
+  animation: workshop-drift 18s linear infinite;
+}
+@keyframes workshop-drift {
+  to {
+    rotate: 1turn;
+  }
+}
+:root[data-motion="off"] .workshop-drift {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) .workshop-drift {
+    animation: none;
+  }
+}

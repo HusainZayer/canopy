@@ -12,8 +12,6 @@ All of these live in `config/site.ts` unless noted.
 | GitHub | `https://github.com/your-handle` | `site.social` |
 | X | `https://x.com/your-handle` | `site.social` |
 | Threads | `https://www.threads.net/@your-handle` | `site.social` |
-| Backdrop URL | `https://backdrop.example.com` | `placeholderUrls.backdrop` |
-| Orchard URL | `https://orchard.example.com` | `placeholderUrls.orchard` |
 | Workshop example | "Lantern", an invented codename and teaser | `content/projects.ts` |
 | Launch dates and changelogs | Not set for Backdrop or Orchard | `content/projects.ts` |
 | Release ticker versions | Mock versions (iOS 27.2 Beta 3 and so on) | `components/previews/orchard-preview.tsx` |

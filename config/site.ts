@@ -41,10 +41,10 @@ export const site = {
     "Canopy and its projects are independent and are not affiliated with, endorsed by or sponsored by Apple Inc. Apple, iPhone, iPad, Mac and App Store are trademarks of Apple Inc.",
 } as const;
 
-/** PLACEHOLDER project URLs, referenced from content/projects.ts. */
+/** Live project URLs, referenced from content/projects.ts. */
 export const placeholderUrls = {
-  backdrop: "https://backdrop.example.com",
-  orchard: "https://orchard.example.com",
+  backdrop: "https://backdrop-liard.vercel.app",
+  orchard: "https://orchard-mu-snowy.vercel.app",
 } as const;
 
 export type Site = typeof site;

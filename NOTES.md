@@ -31,7 +31,7 @@ All of these live in `config/site.ts` unless noted.
 - **Chapters pin only on wide screens.** On phones they scroll naturally, with gentle scroll-linked offsets instead of pinning.
 - **Device tilt needs a tap on iOS.** Safari only allows motion sensors after a permission prompt, so phones that need it show a small "Tilt to look around" button instead of asking on load.
 - **Project pages use a slider instead of scroll.** The previews are driven by the same 0–1 value, so on project pages a labelled range input ("Open the fold", "Sort the apps") lets people scrub at their own pace with touch, pointer or keyboard.
-- **Without JavaScript**, previews show a still frame (the fold open, the apps sorted) and every link and heading is present.
+- **Without JavaScript**, previews show a still frame (the fold open, the app grid at rest) and every link and heading is present.
 
 ## Quality checks run (milestone 6)
 

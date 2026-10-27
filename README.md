@@ -29,7 +29,7 @@ Other scripts:
 2. In Vercel, choose **Add New → Project**, import the repository and keep the detected **Next.js** preset. No environment variables are needed.
 3. Deploy. Every push to the main branch redeploys; pull requests get preview URLs.
 
-Before going live, set `url` in `config/site.ts` to your real domain (canonical URLs, the sitemap and Open Graph images use it), then add that domain under **Project → Settings → Domains**. `vercel.json` makes sure the generated Open Graph images are served as PNG.
+On Vercel the site uses the project's production `.vercel.app` address for canonical URLs, the sitemap and Open Graph images. When you add a custom domain under **Project → Settings → Domains**, also add an environment variable `NEXT_PUBLIC_SITE_URL` (for example `https://canopy.studio`) and redeploy. `vercel.json` makes sure the generated Open Graph images are served as PNG.
 
 Because the site is a static export, the `out/` folder can also be hosted anywhere that serves files (Netlify, Cloudflare Pages, GitHub Pages, S3).
 

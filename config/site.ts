@@ -10,8 +10,16 @@ export const site = {
   description:
     "Canopy is the independent studio of Husain Zayer, making calm, carefully crafted web apps for Apple enthusiasts: Backdrop and Orchard.",
 
-  /** PLACEHOLDER: production origin, used for canonical URLs, sitemap and Open Graph. */
-  url: "https://canopy.example.com",
+  /**
+   * Production origin, used for canonical URLs, sitemap and Open Graph.
+   * Set NEXT_PUBLIC_SITE_URL once you have a custom domain; until then Vercel
+   * builds use the project's production .vercel.app address automatically.
+   */
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : "https://canopy.example.com"),
 
   /** PLACEHOLDER: contact address. */
   email: "hello@canopy.example.com",

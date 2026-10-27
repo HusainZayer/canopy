@@ -6,7 +6,7 @@ All of these live in `config/site.ts` unless noted.
 
 | What | Current value | Where |
 |---|---|---|
-| Site URL (canonical, sitemap, OG) | `https://canopy.example.com` | `site.url` |
+| Site URL (canonical, sitemap, OG) | Vercel's production `.vercel.app` address; set `NEXT_PUBLIC_SITE_URL` in Vercel for a custom domain | `site.url` |
 | Contact email | `hello@canopy.example.com` | `site.email` |
 | Newsletter / waitlist for "Notify me" | `https://canopy.example.com/newsletter` | `site.newsletterUrl` |
 | GitHub | `https://github.com/your-handle` | `site.social` |

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { IconTile, ORCHARD_TONES, type GlyphName } from "@/components/art/icon-tile";
 import { meshFallback } from "@/components/art/mesh-canvas";
-import { chapterProjects } from "@/content/projects";
+import type { Project } from "@/content/schema";
 import { useMotionOn } from "@/lib/preferences";
 
 const TINY: { glyph: GlyphName; tone: keyof typeof ORCHARD_TONES }[] = [
@@ -20,14 +20,13 @@ const TINY: { glyph: GlyphName; tone: keyof typeof ORCHARD_TONES }[] = [
  * The hero's miniatures, folded back into a row of tiny icons: they fall in
  * from hero size and settle into line when the footer comes into view.
  */
-export function FooterMiniatures() {
+export function FooterMiniatures({ paneColors }: { paneColors?: Project["palette"]["colors"] }) {
   const motionOn = useMotionOn();
-  const backdrop = chapterProjects.find((p) => p.preview === "backdrop");
   const items = [
     <div
       key="pane"
       className="aspect-[9/19] w-4 rounded-[5px] ring-1 ring-line sm:w-5"
-      style={{ background: backdrop ? meshFallback(backdrop.palette.colors, 3) : "var(--muted)" }}
+      style={{ background: paneColors ? meshFallback(paneColors, 3) : "var(--muted)" }}
     />,
     ...TINY.map((t) => <IconTile key={t.glyph} glyph={t.glyph} tone={ORCHARD_TONES[t.tone]!} className="w-6 sm:w-7" />),
   ];

@@ -310,6 +310,14 @@
   }
 }
 
+/* Without JavaScript, scroll can't drive the fold, so show it open (the same still frame reduced motion uses). */
+:root:not([data-js]) .fold-hinge {
+  transform: none !important;
+}
+:root:not([data-js]) .fold-shade {
+  opacity: 0 !important;
+}
+
 /* ---------- 404 ---------- */
 .lost-tile {
   rotate: 14deg;

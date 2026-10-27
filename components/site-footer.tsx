@@ -2,13 +2,14 @@ import Link from "next/link";
 import { CanopyMark } from "@/components/canopy-mark";
 import { FooterMiniatures } from "@/components/footer-miniatures";
 import { site } from "@/config/site";
+import { chapterProjects } from "@/content/projects";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
   return (
     <footer className="pt-6 pb-10 sm:pt-10">
       <div className="wrap">
-        <FooterMiniatures />
+        <FooterMiniatures paneColors={chapterProjects.find((p) => p.preview === "backdrop")?.palette.colors} />
         <div className="mt-12 flex flex-col gap-8 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2 font-display text-step-1 font-semibold tracking-[-0.03em]">
             <CanopyMark className="size-6" />

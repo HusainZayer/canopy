@@ -75,11 +75,11 @@ function Foldable({ colors, progress }: { colors: Project["palette"]["colors"]; 
           {/* Left screen (fixed) */}
           <Screen side="left">
             <DuoWallpaper colors={colors} open={open} half="left" />
-            <motion.div aria-hidden className="absolute inset-0 bg-black" style={{ opacity: hingeShade }} />
+            <motion.div aria-hidden className="fold-shade absolute inset-0 bg-black" style={{ opacity: hingeShade }} />
           </Screen>
           {/* Right screen (folds) */}
           <motion.div
-            className="relative h-full w-1/2"
+            className="fold-hinge relative h-full w-1/2"
             style={{ rotateY, transformOrigin: "left center", transformStyle: "preserve-3d" }}
           >
             <Screen side="right" className="absolute inset-0 w-full [backface-visibility:hidden]">

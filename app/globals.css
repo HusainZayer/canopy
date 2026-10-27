@@ -1,26 +1,261 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * Colour values are generated from lib/tokens.ts and content/projects.ts
+ * (see lib/theme-css.ts) and injected in the root layout. This file maps them
+ * into Tailwind and holds type, spacing and motion tokens.
+ */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-wash: var(--wash);
+  --color-p-accent: var(--p-accent);
+  --color-p-tint: var(--p-tint);
+
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-hanken), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid type scale */
+  --text-step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
+  --text-step-0: clamp(1rem, 0.97rem + 0.15vw, 1.08rem);
+  --text-step-1: clamp(1.17rem, 1.1rem + 0.35vw, 1.4rem);
+  --text-step-2: clamp(1.4rem, 1.25rem + 0.75vw, 1.95rem);
+  --text-step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.8rem);
+  --text-step-4: clamp(2.2rem, 1.6rem + 3vw, 4.2rem);
+  --text-step-5: clamp(2.8rem, 1.8rem + 5vw, 6.2rem);
+  --text-display: clamp(4.25rem, 1.5rem + 15vw, 15rem);
+
+  --radius-tile: 22%;
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
 }
 
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gutter: clamp(1.25rem, 4vw, 3.5rem);
+    --section: clamp(6rem, 14vh, 11rem);
+    --wash-duration: 900ms;
+    scrollbar-color: color-mix(in oklab, var(--accent) 55%, transparent) transparent;
+  }
+
+  html {
+    background-color: var(--wash);
+    color: var(--ink);
+    transition:
+      background-color var(--wash-duration) var(--ease-out-soft),
+      color var(--wash-duration) var(--ease-out-soft);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-step-0);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "ss01", "cv11";
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    text-wrap: balance;
+    font-weight: 600;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 28%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+
+  [hidden] {
+    display: none !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 92rem;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .measure {
+    max-width: 62ch;
+  }
+
+  /* A link that reads as text and underlines on hover and focus */
+  .text-link {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+    transition: text-decoration-color 200ms;
+  }
+  .text-link:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Primary call to action: a soft pill filled with the project's accent */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    min-height: 44px;
+    padding: 0.7em 1.25em;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: var(--text-step-0);
+    line-height: 1;
+    transition:
+      transform 300ms var(--ease-out-soft),
+      background-color 300ms;
+  }
+  .pill:active {
+    transform: scale(0.97);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.3em 0.75em 0.3em 0.6em;
+    border-radius: 999px;
+    font-size: var(--text-step--1);
+    font-weight: 600;
+    line-height: 1.2;
+    border: 1px solid color-mix(in oklab, currentColor 30%, transparent);
+  }
+  .badge::before {
+    content: "";
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* Subtle film grain, used only on device glass and wallpaper panes */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--ground);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+  .skip-link:focus-visible {
+    transform: none;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/*
+ * data-motion="off" is set before first paint from the visitor's choice or
+ * their system preference. Without JavaScript, the media query does the same.
+ */
+:root[data-motion="off"] {
+  --wash-duration: 250ms;
+  scroll-behavior: auto;
+}
+:root[data-motion="off"] *,
+:root[data-motion="off"] *::before,
+:root[data-motion="off"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) {
+    --wash-duration: 250ms;
+  }
+  :root:not([data-motion="on"]) *,
+  :root:not([data-motion="on"]) *::before,
+  :root:not([data-motion="on"]) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-motion="off"]) {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Page transitions (React <ViewTransition>) */
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
+  animation-timing-function: var(--ease-out-soft);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  35% {
+    filter: blur(4px);
+  }
+}
+::view-transition-old(.page-out) {
+  animation: 180ms ease-out both page-fade reverse;
+}
+::view-transition-new(.page-in) {
+  animation: 360ms var(--ease-out-soft) 120ms both page-fade;
+}
+@keyframes page-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+:root[data-motion="off"]::view-transition-group(*),
+:root[data-motion="off"]::view-transition-old(*),
+:root[data-motion="off"]::view-transition-new(*) {
+  animation: none !important;
+}
+
+/* Controls that only work with JavaScript are hidden until the head script runs. */
+:root:not([data-js]) .needs-js {
+  display: none;
 }

@@ -20,6 +20,8 @@ export const projectSchema = z
   .object({
     slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slugs are lowercase kebab-case"),
     name: z.string().min(1).max(32),
+    /** A two-to-four word description used in compact places (hero links, footer, cards). */
+    kind: z.string().min(1).max(32),
     tagline: z.string().min(1).max(90),
     description: z.string().min(1),
     highlights: z.tuple([z.string().min(1), z.string().min(1), z.string().min(1)]),

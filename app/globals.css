@@ -30,7 +30,7 @@
   --text-step-3: clamp(1.75rem, 1.45rem + 1.5vw, 2.8rem);
   --text-step-4: clamp(2.2rem, 1.6rem + 3vw, 4.2rem);
   --text-step-5: clamp(2.8rem, 1.8rem + 5vw, 6.2rem);
-  --text-display: clamp(4.25rem, 1.5rem + 15vw, 15rem);
+  --text-display: clamp(4.5rem, 1rem + 12.5vw, 13rem);
 
   --radius-tile: 22%;
   --ease-out-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
@@ -258,4 +258,36 @@
 /* Controls that only work with JavaScript are hidden until the head script runs. */
 :root:not([data-js]) .needs-js {
   display: none;
+}
+
+/* ---------- Hero ---------- */
+
+/* Miniatures drift in from slightly further away and settle (CSS, so it runs without JS). */
+.hero-settle {
+  animation: hero-settle 1400ms var(--ease-out-soft) var(--settle-delay, 0ms) both;
+}
+@keyframes hero-settle {
+  from {
+    opacity: 0;
+    translate: var(--settle-x, 0) var(--settle-y, 30px);
+    scale: 0.82;
+  }
+}
+
+/* A slow, small float once settled. Uses `translate` so it composes with tilt transforms. */
+.hero-float {
+  animation: hero-float var(--float-dur, 7s) ease-in-out var(--float-delay, 0s) infinite;
+}
+@keyframes hero-float {
+  50% {
+    translate: 0 -7px;
+  }
+}
+:root[data-motion="off"] .hero-float {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="on"]) .hero-float {
+    animation: none;
+  }
 }

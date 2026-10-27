@@ -13,6 +13,7 @@ const input: ProjectInput[] = [
   {
     slug: "backdrop",
     name: "Backdrop",
+    kind: "Apple wallpapers",
     tagline: "Every Apple wallpaper, at the exact size your screen wants.",
     description:
       "Backdrop is an unofficial home for Apple wallpapers. It keeps the full archive of original iPhone, iPad and Mac wallpapers, from the very first to the newest, and lets you grab each one at your device's exact resolution so nothing is stretched or cropped by accident.\n\nIt also hosts interactive wallpapers made for iPhone Duo, Apple's foldable iPhone. They are designed across both halves of the screen and respond as you open and close the fold.",
@@ -41,6 +42,7 @@ const input: ProjectInput[] = [
   {
     slug: "orchard",
     name: "Orchard",
+    kind: "Apps and releases",
     tagline: "A calm place to find apps and follow everything Apple ships.",
     description:
       "Orchard is a quiet, minimalist web app for finding apps and games for any Apple device, without the noise of a storefront. Follow App Store updates for the apps you care about and browse apps that already support iPhone Duo.\n\nIt also tracks every software release Apple ships, across every platform, from the first beta through the release candidate to the public release, so you always know what just landed and what is coming next.",
@@ -69,6 +71,7 @@ const input: ProjectInput[] = [
   {
     slug: "lantern",
     name: "Lantern",
+    kind: "Evening companion",
     tagline: "Something small and warm for the end of the day.",
     description:
       "Lantern is still being shaped in the workshop. It is a small companion for winding down in the evening, and it will be shared here when it is ready.",

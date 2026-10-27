@@ -87,6 +87,7 @@ On phones (<768px): no pinning, previews sit below the text, parallax is replace
 {
   slug: string            // kebab-case, unique
   name: string            // display name; doubles as codename in the workshop
+  kind: string            // two-to-four word label for compact places (hero links, footer)
   tagline: string         // one-line pitch, ≤ 90 chars
   description: string     // a paragraph or two for the project page
   highlights: [string, string, string]

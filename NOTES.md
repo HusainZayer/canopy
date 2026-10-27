@@ -13,7 +13,8 @@ All of these live in `config/site.ts` unless noted.
 | X | `https://x.com/your-handle` | `site.social` |
 | Threads | `https://www.threads.net/@your-handle` | `site.social` |
 | Workshop example | "Lantern", an invented codename and teaser | `content/projects.ts` |
-| Launch dates and changelogs | Not set for Backdrop or Orchard | `content/projects.ts` |
+| Backdrop launch date | Not set (the repo history starts 26 October; add the public launch date when you know it) | `content/projects.ts` |
+| Orchard "what's next" | Empty: the previous items have shipped. Add new plans when you have them | `content/projects.ts` |
 | Release ticker versions | Mock versions (iOS 27.2 Beta 3 and so on) | `components/previews/orchard-preview.tsx` |
 | About copy | Written in your voice from the brief; check it sounds like you | `components/about-section.tsx`, `app/about/page.tsx` |
 

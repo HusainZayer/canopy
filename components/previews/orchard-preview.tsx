@@ -7,10 +7,10 @@ import { usePreviewProgress, useUserDriven } from "@/components/chapters/chapter
 import type { Project } from "@/content/schema";
 import { useMotionOn } from "@/lib/preferences";
 
-type Category = "Productivity" | "Creativity" | "Games";
+type Category = "Productivity" | "Music" | "Games";
 type App = { id: string; glyph: GlyphName; tone: keyof typeof ORCHARD_TONES; category: Category };
 
-const CATEGORIES: Category[] = ["Productivity", "Creativity", "Games"];
+const CATEGORIES: Category[] = ["Productivity", "Music", "Games"];
 
 /** Sorted order: three rows of four, one per category. */
 const APPS: App[] = [
@@ -18,10 +18,10 @@ const APPS: App[] = [
   { id: "b", glyph: "frame", tone: "mist", category: "Productivity" },
   { id: "c", glyph: "stack", tone: "sky", category: "Productivity" },
   { id: "d", glyph: "dots", tone: "sage", category: "Productivity" },
-  { id: "e", glyph: "spark", tone: "clay", category: "Creativity" },
-  { id: "f", glyph: "leaf", tone: "grove", category: "Creativity" },
-  { id: "g", glyph: "wave", tone: "cream", category: "Creativity" },
-  { id: "h", glyph: "sun", tone: "gold", category: "Creativity" },
+  { id: "e", glyph: "spark", tone: "clay", category: "Music" },
+  { id: "f", glyph: "leaf", tone: "grove", category: "Music" },
+  { id: "g", glyph: "wave", tone: "cream", category: "Music" },
+  { id: "h", glyph: "sun", tone: "gold", category: "Music" },
   { id: "i", glyph: "play", tone: "grove", category: "Games" },
   { id: "j", glyph: "moon", tone: "night", category: "Games" },
   { id: "k", glyph: "ring", tone: "gold", category: "Games" },
@@ -72,7 +72,7 @@ export function OrchardPreview({ project }: { project: Project }) {
     <div
       ref={ref}
       role="img"
-      aria-label={`${project.name} preview: app icons sorting themselves into Productivity, Creativity and Games, above a ticker of Apple software releases marked Beta, RC or Release.`}
+      aria-label={`${project.name} preview: app icons sorting themselves into Productivity, Music and Games, above a ticker of Apple software releases marked Beta, RC or Release.`}
       className="mx-auto w-full max-w-[38rem]"
     >
       <LayoutGroup>

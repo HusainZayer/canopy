@@ -182,7 +182,9 @@ function Updates({ project: p }: { project: Project }) {
         <>
           <h2 className="mt-14 text-step-2 font-bold tracking-[-0.03em]">Changelog</h2>
           <ol className="mt-5 space-y-6 border-l border-line pl-6">
+            {/* Newest first; entries on the same day keep their written order, reversed */}
             {[...p.changelog]
+              .reverse()
               .sort((a, b) => b.date.localeCompare(a.date))
               .map((c) => (
                 <li key={c.date + c.title} className="relative">

@@ -161,6 +161,17 @@ function Detail({ term, children }: { term: string; children: ReactNode }) {
   );
 }
 
+type ChangelogEntry = NonNullable<Project["changelog"]>[number];
+
+/** Groups changelog entries by day, newest day first; within a day, the last-written entry comes first. */
+function changelogByDay(entries: ChangelogEntry[]) {
+  const days = new Map<string, ChangelogEntry[]>();
+  for (const e of [...entries].reverse()) days.set(e.date, [...(days.get(e.date) ?? []), e]);
+  return [...days.entries()]
+    .sort(([a], [b]) => b.localeCompare(a))
+    .map(([date, list]) => ({ date, entries: list }));
+}
+
 function Updates({ project: p }: { project: Project }) {
   if (!p.next?.length && !p.changelog?.length) return null;
   return (
@@ -181,21 +192,26 @@ function Updates({ project: p }: { project: Project }) {
       {p.changelog && p.changelog.length > 0 && (
         <>
           <h2 className="mt-14 text-step-2 font-bold tracking-[-0.03em]">Changelog</h2>
-          <ol className="mt-5 space-y-6 border-l border-line pl-6">
-            {/* Newest first; entries on the same day keep their written order, reversed */}
-            {[...p.changelog]
-              .reverse()
-              .sort((a, b) => b.date.localeCompare(a.date))
-              .map((c) => (
-                <li key={c.date + c.title} className="relative">
-                  <span aria-hidden className="absolute top-[0.5em] -left-[calc(1.5rem+4.5px)] size-2 rounded-full bg-p-accent" />
-                  <p className="font-semibold">{c.title}</p>
-                  <p className="text-step--1 text-muted">
-                    <time dateTime={c.date}>{formatDate(c.date)}</time>
-                  </p>
-                  {c.body && <p className="mt-1 text-muted">{c.body}</p>}
-                </li>
-              ))}
+          <ol className="mt-6 space-y-10 border-l border-line pl-6">
+            {changelogByDay(p.changelog).map((day) => (
+              <li key={day.date} className="relative">
+                <span
+                  aria-hidden
+                  className="absolute top-[0.3em] -left-[calc(1.5rem+5.5px)] size-2.5 rounded-full bg-p-accent ring-4 ring-[var(--wash)]"
+                />
+                <h3 className="font-semibold tracking-normal text-p-accent" style={{ fontFamily: "var(--font-sans)" }}>
+                  <time dateTime={day.date}>{formatDate(day.date)}</time>
+                </h3>
+                <ul className="mt-3 space-y-4">
+                  {day.entries.map((c) => (
+                    <li key={c.title}>
+                      <p className="font-semibold">{c.title}</p>
+                      {c.body && <p className="mt-1 text-muted">{c.body}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
           </ol>
         </>
       )}

@@ -85,12 +85,21 @@ function Foldable({ colors, progress }: { colors: Project["palette"]["colors"]; 
             <Screen side="right" className="absolute inset-0 w-full [backface-visibility:hidden]">
               <DuoWallpaper colors={colors} open={open} half="right" />
             </Screen>
-            {/* Back of the device, seen when folded */}
+            {/* Back of the device, seen when folded: a tinted body with a camera module */}
             <div
               aria-hidden
-              className="absolute inset-0 rounded-l-[10%] rounded-r-[4%] bg-surface ring-1 ring-line [backface-visibility:hidden]"
-              style={{ transform: "rotateY(180deg)", background: "linear-gradient(140deg, var(--surface), color-mix(in oklab, var(--surface) 80%, var(--ink)))" }}
-            />
+              className="absolute inset-0 overflow-hidden rounded-l-[10%] rounded-r-[4%] ring-1 ring-line [backface-visibility:hidden]"
+              style={{
+                transform: "rotateY(180deg)",
+                background: `linear-gradient(155deg, color-mix(in oklab, ${colors[1]} 34%, var(--surface)), color-mix(in oklab, ${colors[0]} 52%, var(--surface)))`,
+              }}
+            >
+              <div className="absolute top-[7%] left-[9%] flex w-[24%] flex-col items-center gap-[10%] rounded-[34%] bg-[color-mix(in_oklab,var(--ink)_16%,transparent)] px-[4%] py-[9%] ring-1 ring-white/25">
+                <span className="aspect-square w-[78%] rounded-full bg-[#121214] ring-2 ring-white/20" />
+                <span className="aspect-square w-[78%] rounded-full bg-[#121214] ring-2 ring-white/20" />
+              </div>
+              <div className="absolute inset-0 bg-[linear-gradient(120deg,rgb(255_255_255/0.28),transparent_42%)]" />
+            </div>
           </motion.div>
         </div>
       </motion.div>

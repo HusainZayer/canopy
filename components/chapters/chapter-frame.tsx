@@ -46,9 +46,9 @@ export function ChapterFrame({
       data-project={slug}
       data-world-trigger={slug}
       aria-labelledby={labelledBy}
-      className="relative scroll-mt-0 lg:h-[230vh]"
+      className="relative scroll-mt-0 lg:h-[190vh]"
     >
-      <div className="wrap grid grid-cols-[minmax(0,1fr)] items-center gap-x-10 gap-y-14 py-[var(--section)] lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-12 lg:py-20">
+      <div className="wrap grid grid-cols-[minmax(0,1fr)] items-center gap-x-10 gap-y-12 py-16 sm:gap-y-14 sm:py-[var(--section)] lg:sticky lg:top-0 lg:min-h-svh lg:grid-cols-12 lg:py-20">
         <div className="min-w-0 lg:col-span-5">{text}</div>
         <ProgressContext.Provider value={scrollYProgress}>
           <motion.div className="min-w-0 origin-center lg:col-span-7" style={{ scale: grow, y: lift }}>

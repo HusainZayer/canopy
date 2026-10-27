@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ViewTransition } from "react";
 import { SocialLinks } from "@/components/social-links";
 import { StatusBadge } from "@/components/status-badge";
-import { site } from "@/config/site";
+import { liveEmail, liveSocial, site } from "@/config/site";
 import { projects } from "@/content/projects";
 import { JsonLd, organizationLd } from "@/lib/structured-data";
 
@@ -42,8 +42,8 @@ export default function AboutPage() {
             </p>
             <div className="measure space-y-5 text-step-1 text-muted lg:col-span-5 lg:pt-3">
               <p>
-                I&rsquo;m {site.maker}, and {site.name} is my independent studio. It&rsquo;s where I build small, focused
-                web apps for people who care about their iPhone, iPad and Mac as much as I do.
+                I&rsquo;m {site.maker}, and {site.name} is my independent studio. It&rsquo;s where I build small,
+                focused web apps for people who care about their iPhone, iPad and Mac as much as I do.
               </p>
               <p>
                 It started with a simple itch: I wanted every Apple wallpaper in one place, at the right size, without
@@ -97,15 +97,17 @@ export default function AboutPage() {
             </ul>
           </section>
 
-          <section aria-labelledby="hello-title" className="mt-24 border-t border-line pt-12 sm:mt-32">
-            <h2 id="hello-title" className="text-step-3 font-bold tracking-[-0.035em]">
-              Say hello
-            </h2>
-            <p className="measure mt-4 text-step-1 text-muted">
-              Ideas, bugs, collaborations, job offers or a wallpaper you think is missing: my inbox is open.
-            </p>
-            <SocialLinks className="mt-6" />
-          </section>
+          {(liveEmail || liveSocial.length > 0) && (
+            <section aria-labelledby="hello-title" className="mt-24 border-t border-line pt-12 sm:mt-32">
+              <h2 id="hello-title" className="text-step-3 font-bold tracking-[-0.035em]">
+                Say hello
+              </h2>
+              <p className="measure mt-4 text-step-1 text-muted">
+                Ideas, bugs, collaborations, job offers or a wallpaper you think is missing: my inbox is open.
+              </p>
+              <SocialLinks className="mt-6" />
+            </section>
+          )}
         </div>
       </main>
     </ViewTransition>

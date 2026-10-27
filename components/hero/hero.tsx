@@ -17,12 +17,12 @@ export function Hero() {
             {site.statement}
           </p>
         </div>
-        <div className="my-10 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:my-0 lg:self-center">
+        <div className="my-10 pointer-coarse:mb-28 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1 lg:my-0 lg:self-center lg:pointer-coarse:mb-0">
           <HeroScene backdrop={backdrop} orchard={orchard} />
         </div>
         <div className="relative z-10 lg:col-span-7 lg:row-start-2">
           <p className="measure text-step-1 text-muted lg:mt-6">
-            An independent studio by {site.maker}, making web apps for people who love their iPhone, iPad and Mac.
+            Independent web apps for iPhone, iPad and Mac, made by {site.maker}.
           </p>
           <nav aria-label="Projects" className="mt-8 sm:mt-10">
             <ul className="flex flex-wrap gap-2 sm:gap-3">

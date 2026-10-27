@@ -1,15 +1,13 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 import { CanopyMark } from "./canopy-mark";
-import { MotionToggle, ThemeToggle } from "./preference-toggles";
+import { HeaderSurface } from "./header-surface";
+import { ThemeToggle } from "./preference-toggles";
 
 export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 h-[140%] bg-[linear-gradient(to_bottom,var(--wash)_45%,transparent)] transition-colors duration-[var(--wash-duration)]"
-      />
+      <HeaderSurface />
       <div className="wrap relative flex h-16 items-center gap-4 sm:h-20">
         <Link
           href="/"
@@ -21,9 +19,9 @@ export function SiteHeader() {
         </Link>
         <nav aria-label="Primary" className="ml-auto">
           <ul className="flex items-center gap-1 text-step--1 font-medium sm:gap-2 sm:text-step-0">
-            <li className="hidden sm:block">
+            <li>
               <Link className="rounded-full px-3 py-2 text-muted transition-colors hover:text-ink" href="/#work">
-                Work
+                Projects
               </Link>
             </li>
             <li className="hidden sm:block">
@@ -38,10 +36,7 @@ export function SiteHeader() {
             </li>
           </ul>
         </nav>
-        <div className="flex items-center gap-1">
-          <MotionToggle />
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </div>
     </header>
   );

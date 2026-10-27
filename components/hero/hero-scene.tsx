@@ -59,64 +59,111 @@ export function HeroScene({ backdrop, orchard }: { backdrop?: Project; orchard?:
   const meshColors = backdrop?.palette.colors ?? (["#1E1B4B", "#5B47E0", "#E9806E", "#F7C8A0"] as const);
 
   return (
-    <motion.div
-      ref={ref}
-      className="relative mx-auto aspect-[1/0.95] w-full max-w-[21rem] [perspective:1200px] sm:max-w-[28rem] lg:max-w-[34rem]"
-      style={{ y: lift, scale: gather }}
-    >
-      {/* Backdrop: a wallpaper pane that slowly shifts */}
-      <Layer tiltX={x} tiltY={y} depth={0.6} className="hero-settle" style={{ left: "4%", top: "3%", width: "45%", "--settle-x": "-18px", "--settle-y": "26px", "--settle-delay": "0ms" } as CSSProperties}>
-        <motion.div style={{ rotateX, rotateY, transformStyle: "preserve-3d" }} className="hero-float [--float-dur:9s]">
-          <div className="relative aspect-[9/19] rounded-[18%/8.5%] bg-surface p-[3.5%] shadow-[0_1px_0_rgb(255_255_255/0.4)_inset,0_30px_60px_-30px_var(--shade),0_18px_36px_-24px_rgb(0_0_0/0.35)] ring-1 ring-line">
-            <div className="grain relative size-full overflow-hidden rounded-[15%/7%]">
-              <MeshCanvas colors={meshColors} seed={3} className="absolute inset-0" />
-              <div aria-hidden className="absolute inset-0 bg-[linear-gradient(125deg,rgb(255_255_255/0.22),transparent_40%)]" />
-            </div>
-          </div>
-        </motion.div>
-        {backdrop && <SceneLabel project={backdrop} className="-bottom-3 left-[8%]" />}
-      </Layer>
-
-      {/* Orchard: a loose cluster of app tiles that drift in and settle */}
-      {TILES.map((t, i) => (
+    <div className="relative">
+      <motion.div
+        ref={ref}
+        className="relative mx-auto aspect-[1/0.95] w-full max-w-[21rem] [perspective:1200px] sm:max-w-[28rem] lg:max-w-[34rem]"
+        style={{ y: lift, scale: gather }}
+      >
+        {/* Backdrop: a wallpaper pane that slowly shifts */}
         <Layer
-          key={t.glyph}
           tiltX={x}
           tiltY={y}
-          depth={t.depth}
+          depth={0.6}
           className="hero-settle"
           style={
             {
-              left: `${t.x}%`,
-              top: `${t.y}%`,
-              width: `${t.size}%`,
-              "--settle-x": `${(t.x - 60) * 1.6}px`,
-              "--settle-y": `${40 + t.depth * 14}px`,
-              "--settle-delay": `${140 + i * 70}ms`,
+              left: "4%",
+              top: "3%",
+              width: "45%",
+              "--settle-x": "-18px",
+              "--settle-y": "26px",
+              "--settle-delay": "0ms",
             } as CSSProperties
           }
         >
-          <div className="hero-float" style={{ "--float-dur": `${6 + (i % 3) * 1.4}s`, "--float-delay": `${-i * 0.9}s` } as CSSProperties}>
-            <IconTile glyph={t.glyph} tone={ORCHARD_TONES[t.tone]!} />
-          </div>
+          <motion.div
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            className="hero-float [--float-dur:9s]"
+          >
+            <div className="relative aspect-[9/19] rounded-[18%/8.5%] bg-surface p-[3.5%] shadow-[0_1px_0_rgb(255_255_255/0.4)_inset,0_30px_60px_-30px_var(--shade),0_18px_36px_-24px_rgb(0_0_0/0.35)] ring-1 ring-line">
+              <div className="grain relative size-full overflow-hidden rounded-[15%/7%]">
+                <MeshCanvas colors={meshColors} seed={3} className="absolute inset-0" />
+                <div
+                  aria-hidden
+                  className="absolute inset-0 bg-[linear-gradient(125deg,rgb(255_255_255/0.22),transparent_40%)]"
+                />
+              </div>
+            </div>
+          </motion.div>
+          {backdrop && <SceneLabel project={backdrop} className="-bottom-3 left-[8%]" />}
         </Layer>
-      ))}
-      {orchard && (
-        <Layer tiltX={x} tiltY={y} depth={1.1} className="hero-settle" style={{ left: "70%", top: "88%", "--settle-delay": "700ms" } as CSSProperties}>
-          <SceneLabel project={orchard} className="" />
-        </Layer>
-      )}
 
+        {/* Orchard: a loose cluster of app tiles that drift in and settle */}
+        {TILES.map((t, i) => (
+          <Layer
+            key={t.glyph}
+            tiltX={x}
+            tiltY={y}
+            depth={t.depth}
+            className="hero-settle"
+            style={
+              {
+                left: `${t.x}%`,
+                top: `${t.y}%`,
+                width: `${t.size}%`,
+                "--settle-x": `${(t.x - 60) * 1.6}px`,
+                "--settle-y": `${40 + t.depth * 14}px`,
+                "--settle-delay": `${140 + i * 70}ms`,
+              } as CSSProperties
+            }
+          >
+            <div
+              className="hero-float"
+              style={{ "--float-dur": `${6 + (i % 3) * 1.4}s`, "--float-delay": `${-i * 0.9}s` } as CSSProperties}
+            >
+              <IconTile glyph={t.glyph} tone={ORCHARD_TONES[t.tone]!} />
+            </div>
+          </Layer>
+        ))}
+        {orchard && (
+          <Layer
+            tiltX={x}
+            tiltY={y}
+            depth={1.1}
+            className="hero-settle"
+            style={{ left: "70%", top: "88%", "--settle-delay": "700ms" } as CSSProperties}
+          >
+            <SceneLabel project={orchard} className="" />
+          </Layer>
+        )}
+      </motion.div>
       {canAskForTilt && (
-        <button
-          type="button"
-          onClick={askForTilt}
-          className="absolute -bottom-11 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-surface/80 px-4 py-2 text-step--1 font-semibold text-ink shadow-sm ring-1 ring-line backdrop-blur"
-        >
-          Tilt to look around
-        </button>
+        // Sits in space reserved on touch screens (see hero.tsx), so showing it never shifts the page.
+        <div className="absolute inset-x-0 top-full mt-10 flex justify-center">
+          <button
+            type="button"
+            onClick={askForTilt}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[color-mix(in_oklab,var(--surface)_80%,transparent)] px-4 text-step--1 font-semibold text-ink ring-1 ring-line backdrop-blur"
+          >
+            <svg viewBox="0 0 24 24" className="size-4" aria-hidden focusable="false">
+              <rect
+                x="7"
+                y="3"
+                width="10"
+                height="18"
+                rx="2.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                transform="rotate(-12 12 12)"
+              />
+            </svg>
+            Tilt your phone to look around
+          </button>
+        </div>
       )}
-    </motion.div>
+    </div>
   );
 }
 

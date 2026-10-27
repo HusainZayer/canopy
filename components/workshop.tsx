@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { StatusBadge } from "@/components/status-badge";
-import { site } from "@/config/site";
+import { isPlaceholder, liveNewsletterUrl } from "@/config/site";
 import { workshopProjects } from "@/content/projects";
 import type { Project } from "@/content/schema";
 
@@ -14,7 +14,9 @@ export function Workshop() {
             In the workshop
           </h2>
           <p className="mt-5 max-w-[30ch] text-step-1 text-muted">
-            Things on the bench that aren&rsquo;t ready to show yet. A codename and a hint, for now.
+            {workshopProjects.some((p) => !isPlaceholder(p.notifyUrl)) || liveNewsletterUrl
+              ? "What I’m building next. Get a note when it’s ready."
+              : "What I’m building next. A codename and a hint, for now."}
           </p>
         </div>
         <ul className="grid content-start gap-4 self-start lg:col-span-7 lg:col-start-6">
@@ -28,7 +30,7 @@ export function Workshop() {
 }
 
 function WorkshopCard({ project: p }: { project: Project }) {
-  const notify = p.notifyUrl ?? site.newsletterUrl;
+  const notify = isPlaceholder(p.notifyUrl) ? liveNewsletterUrl : p.notifyUrl;
   const [c1, c2, c3, c4] = p.palette.colors;
   return (
     <li

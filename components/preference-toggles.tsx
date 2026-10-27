@@ -26,26 +26,24 @@ export function ThemeToggle() {
   );
 }
 
-export function MotionToggle() {
+/** A labelled on/off switch for animations, shown in the footer. */
+export function MotionSwitch() {
   const on = useMotionOn();
   return (
     <button
       type="button"
-      className={buttonClass}
+      role="switch"
+      aria-checked={on}
       onClick={() => setMotion(!on)}
-      aria-pressed={on}
-      aria-label="Motion"
-      title={on ? "Turn motion off" : "Turn motion on"}
+      className="needs-js group inline-flex min-h-11 items-center gap-3 rounded-full text-step--1 font-semibold text-muted transition-colors hover:text-ink"
     >
-      <svg viewBox="0 0 24 24" className="size-5" aria-hidden focusable="false">
-        <path
-          d={on ? "M3 12c2.5-5 5-5 7.5 0s5 5 7.5 0c.9-1.8 1.9-3 3-3.4" : "M3 12h18"}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-        />
-      </svg>
+      Animations
+      <span
+        aria-hidden
+        className="relative h-6 w-10 rounded-full bg-[color-mix(in_oklab,var(--ink)_14%,transparent)] transition-colors duration-300 group-aria-checked:bg-[var(--accent)]"
+      >
+        <span className="absolute top-0.5 left-0.5 size-5 rounded-full bg-surface shadow-sm transition-transform duration-300 ease-[var(--ease-out-soft)] group-aria-checked:translate-x-4" />
+      </span>
     </button>
   );
 }

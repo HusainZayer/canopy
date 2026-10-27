@@ -1,4 +1,4 @@
-import { site } from "@/config/site";
+import { liveEmail, liveSocial, site } from "@/config/site";
 import type { Project } from "@/content/schema";
 
 const PLATFORM_OS: Record<Project["platforms"][number], string> = {
@@ -17,9 +17,9 @@ export const organizationLd = {
   name: site.name,
   url: site.url,
   description: site.description,
-  email: site.email,
+  ...(liveEmail ? { email: liveEmail } : {}),
   founder: { "@type": "Person", name: site.maker },
-  sameAs: site.social.map((s) => s.href),
+  sameAs: liveSocial.map((s) => s.href),
 };
 
 export function softwareApplicationLd(p: Project) {

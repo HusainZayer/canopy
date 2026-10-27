@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { CanopyMark } from "@/components/canopy-mark";
 import { FooterMiniatures } from "@/components/footer-miniatures";
-import { site } from "@/config/site";
+import { MotionSwitch } from "@/components/preference-toggles";
+import { liveEmail, site } from "@/config/site";
 import { chapterProjects } from "@/content/projects";
 
 export function SiteFooter() {
@@ -19,7 +20,7 @@ export function SiteFooter() {
             <ul className="flex flex-wrap gap-x-6 gap-y-1 text-muted">
               <li>
                 <Link className="text-link inline-flex min-h-11 items-center" href="/#work">
-                  Work
+                  Projects
                 </Link>
               </li>
               <li>
@@ -32,18 +33,23 @@ export function SiteFooter() {
                   About
                 </Link>
               </li>
-              <li>
-                <a className="text-link inline-flex min-h-11 items-center" href={`mailto:${site.email}`}>
-                  Email
-                </a>
-              </li>
+              {liveEmail && (
+                <li>
+                  <a className="text-link inline-flex min-h-11 items-center" href={`mailto:${liveEmail}`}>
+                    Email
+                  </a>
+                </li>
+              )}
             </ul>
           </nav>
         </div>
         <div className="mt-8 grid gap-3 text-step--1 text-muted sm:grid-cols-[auto_1fr] sm:gap-10">
-          <p>
-            &copy; {year} {site.name}. Made by {site.maker}.
-          </p>
+          <div className="flex flex-col items-start gap-1">
+            <p>
+              &copy; {year} {site.name}. Made by {site.maker}.
+            </p>
+            <MotionSwitch />
+          </div>
           <p className="max-w-[70ch] sm:justify-self-end sm:text-right">{site.disclaimer}</p>
         </div>
       </div>

@@ -48,3 +48,11 @@ export const placeholderUrls = {
 } as const;
 
 export type Site = typeof site;
+
+/** True for values still set to a placeholder (example.com addresses or "your-handle"). */
+export const isPlaceholder = (value?: string | null) => !value || /example\.com|your-handle/.test(value);
+
+/** Only the links that are real, so the live site never shows a dead end. */
+export const liveSocial = site.social.filter((s) => !isPlaceholder(s.href));
+export const liveEmail = isPlaceholder(site.email) ? null : site.email;
+export const liveNewsletterUrl = isPlaceholder(site.newsletterUrl) ? null : site.newsletterUrl;
